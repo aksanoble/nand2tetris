@@ -17,4 +17,15 @@ CHIP DMux4Way {
 
     PARTS:
     // Put your code here:
+    Or(a=sel[0], b=sel[1], out=selA);
+    Nand(a=sel[0], b=sel[1], out=selD);
+    Not(in=sel[0], out=not0);
+    Not(in=sel[1], out=not1);
+    And(a=not0, b=not1, out=notAnotB);
+    Or(a=notAnotB, b=sel[1], out=selB);
+    Or(a=notAnotB, b=sel[0], out=selC);
+    Mux(a=in, b=false, sel=selA, out=a);
+    Mux(a=in, b=false, sel=selB, out=b);
+    Mux(a=in, b=false, sel=selC, out=c);
+    Mux(a=in, b=false, sel=selD, out=d);
 }
