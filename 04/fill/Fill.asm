@@ -12,43 +12,106 @@
 // the screen should remain fully clear as long as no key is pressed.
 
 // Put your code here.
-@24575
-D=A
 
-@R0 //Max register value for paint full screen
-M=D
+(READ_KEYBOARD)
 
-@SCREEN
-D=A
+@KBD
+D=M
 
-@R1 // Initial register
-M=D
+@PAINT_BLACK_SCREEN
+D;JGT
 
-(END_PAINT)
-  @R0
-  D=M
+@PAINT_WHITE_SCREEN
+0;JMP
 
-  @R1
-  D=D-M;
+(PAINT_BLACK_SCREEN)
 
-  @INFINITE_LOOP
-  D;JLT
+  @24575
+  D=A
 
-(PAINT)
-  @R1
-  D=M
-
-  A=D
-  M=-1
-
-  D=D+1
-
-  @R1
+  @R0 //Max register value for paint full screen
   M=D
 
-  @END_PAINT
-  0;JMP
+  @SCREEN
+  D=A
 
-(INFINITE_LOOP)
-  @INFINITE_LOOP
-  0;JMP
+  @R1 // Initial SCREEN address
+  M=D
+
+
+  (PAINT_BLACK)
+    @R1
+    D=M
+
+    A=D
+    M=-1
+
+    D=D+1
+
+    @R1
+    M=D
+
+    @END_PAINT_BLACK
+    0;JMP
+
+
+    (END_PAINT_BLACK)
+    @R0
+    D=M
+
+    @R1
+    D=D-M;
+
+    @PAINT_BLACK
+    D;JGE
+
+    @READ_KEYBOARD
+    D;JLT
+
+
+(PAINT_WHITE_SCREEN)
+
+  @24575
+  D=A
+
+  @R0 //Max register value for paint full screen
+  M=D
+
+  @SCREEN
+  D=A
+
+  @R1 // Initial Screen Address
+  M=D
+
+  (PAINT_WHITE)
+  @R1
+    D=M
+
+    A=D
+    M=0
+
+    D=D+1
+
+    @R1
+    M=D
+
+    @END_PAINT_WHITE
+    0;JMP
+
+
+(END_PAINT_WHITE)
+    @R0
+    D=M
+
+    @R1
+    D=D-M;
+
+    @PAINT_WHITE
+    D;JGE
+
+    @READ_KEYBOARD
+    D;JLT
+
+
+
+
