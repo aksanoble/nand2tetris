@@ -1,0 +1,14 @@
+{
+  "name": "assembler",
+  "version": "0.0.1",
+  "description": "An Assembler for the Hack Assembly Language. Written as part of the nand2tetris course. ",
+  "main": "Assembler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nand2tetris"
+  ],
+  "author": "aksanoble",
+  "license": "ISC"
+}
